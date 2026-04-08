@@ -1,4 +1,8 @@
-import { heading, info, warn } from "../ui/logger.js";
+import chalk from "chalk";
+import { generateConfigFromProfile, saveConfig } from "../../core/config/loader.js";
+import { detectProject } from "../../core/detector/index.js";
+import { generateAll } from "../../core/generator/index.js";
+import { error, heading, info, success, warn } from "../ui/logger.js";
 import { createSpinner } from "../ui/spinner.js";
 
 interface InitOptions {
@@ -14,26 +18,53 @@ export async function initCommand(options: InitOptions): Promise<void> {
     info("Running in dry-run mode — no files will be written");
   }
 
-  const spinner = createSpinner("Scanning project...");
-  spinner.start();
+  try {
+    // Step 1: Detect project
+    const spinner = createSpinner("Scanning project...");
+    spinner.start();
+    const profile = await detectProject(process.cwd());
+    spinner.succeed(
+      `Detected: ${profile.name} (${profile.language}/${profile.framework ?? "generic"})`,
+    );
 
-  // TODO: Implement detection engine
-  await new Promise((resolve) => setTimeout(resolve, 500));
-  spinner.succeed("Project scanned");
+    // Step 2: Generate config
+    const configSpinner = createSpinner("Generating .airules.yml...");
+    configSpinner.start();
+    const config = generateConfigFromProfile(profile);
 
-  // TODO: Generate .airules.yml
-  // TODO: Run generators for selected targets
-  // TODO: Display summary
+    if (!options.dryRun) {
+      saveConfig(process.cwd(), config);
+    }
+    configSpinner.succeed(".airules.yml generated");
 
-  info("Generated files will appear here:");
-  console.log("  CLAUDE.md");
-  console.log("  .cursorrules");
-  console.log("  .github/copilot-instructions.md");
-  console.log("");
+    // Step 3: Generate target files
+    const genSpinner = createSpinner("Generating AI rules for configured tools...");
+    genSpinner.start();
+    const results = generateAll(
+      profile,
+      config,
+      process.cwd(),
+      options.dryRun,
+      options.force,
+      options.target,
+    );
+    genSpinner.succeed(`${results.length} file(s) generated`);
 
-  if (options.dryRun) {
-    warn("Dry run complete. Remove --dry-run to write files.");
-  } else {
-    info("Run `airules sync` to regenerate after editing .airules.yml");
+    // Display summary
+    console.log("");
+    info("Generated files:");
+    for (const result of results) {
+      console.log(`  ${chalk.green("✔")} ${result.path} (${result.tool})`);
+    }
+    console.log("");
+
+    if (options.dryRun) {
+      warn("Dry run complete. Remove --dry-run to write files.");
+    } else {
+      success("Setup complete! Edit .airules.yml and run `airules sync` to regenerate.");
+    }
+  } catch (err: unknown) {
+    error(`Failed: ${err instanceof Error ? err.message : String(err)}`);
+    process.exitCode = 1;
   }
 }
