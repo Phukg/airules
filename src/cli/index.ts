@@ -1,18 +1,31 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
+import { checkForUpdates } from "../utils/version.js";
 import { detectCommand } from "./commands/detect.js";
 import { initCommand } from "./commands/init.js";
 import { scoreCommand } from "./commands/score.js";
 import { syncCommand } from "./commands/sync.js";
+import { printBanner } from "./ui/banner.js";
+
+const VERSION = "1.0.0";
 
 export function cli(): void {
   const program = new Command();
 
+  // Show banner if no args
+  const hasArgs = process.argv.length > 2;
+  if (!hasArgs) {
+    printBanner();
+  }
+
+  // Check for updates
+  checkForUpdates().catch(() => {});
+
   program
     .name("airules")
     .description("One config to rule them all. Generate & sync AI coding rules across every tool.")
-    .version("0.1.0");
+    .version(VERSION);
 
   program
     .command("init")
