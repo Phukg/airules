@@ -1,0 +1,21 @@
+# airules — Cursor Rules
+
+Stack: Generic (typescript)
+
+## Code Style
+- Use camelCase naming convention
+- Use named imports
+- Use double quotes
+- Prefer functional programming patterns
+
+## Architecture
+- Follow feature-based architecture
+- Use rest for APIs
+
+## Testing
+- Use vitest for testing
+- Follow arrange-act-assert pattern
+
+## Git
+- Use conventional commit messages
+- Branch naming: feature/*

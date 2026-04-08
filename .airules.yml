@@ -1,0 +1,36 @@
+version: 1
+project:
+  name: airules
+  language: typescript
+targets:
+  - claude
+  - cursor
+  - copilot
+rules:
+  style:
+    prefer_functional: true
+    naming_convention: camelCase
+    import_style: named
+    quote_style: double
+  architecture:
+    pattern: feature-based
+    api_style: rest
+  testing:
+    framework: vitest
+    style: arrange-act-assert
+    require_tests_for: []
+  git:
+    commit_style: conventional
+    branch_pattern: feature/*
+    require_pr: true
+  docs:
+    require_jsdoc: false
+    language: english
+  security:
+    no_secrets_in_code: true
+  performance: {}
+custom: []
+exclude:
+  - node_modules
+  - dist
+  - coverage
