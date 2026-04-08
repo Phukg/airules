@@ -1,0 +1,17 @@
+# Source code (shipped as bundled dist/)
+src/
+tests/
+
+# Config files (not needed at runtime)
+tsconfig.json
+tsup.config.ts
+vitest.config.ts
+biome.json
+
+# Dev docs
+docs/
+CONTRIBUTING.md
+CHANGELOG.md
+
+# Git
+.gitattributes
